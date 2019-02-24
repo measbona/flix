@@ -1,0 +1,35 @@
+<h1> <%= pluralize(@movies.size,'Movie') %> </h1>
+  
+  <%= link_to("Add New Movie", new_movie_path) %>
+
+<ul>
+            <% @movies.each do |movie| %>
+  <li>
+    	 <head><%= image_tag(movie.image_file_name) %>
+
+    		  <h2>
+              <%= link_to(movie.title, movie_path(movie)) %> id: <%= movie.id %> 
+          </h2>
+    	 </head>
+              <p>
+                  <%= truncate(movie.description, length: 100, separator: '.....') %>
+              </p>
+    	<table>
+              <tr>
+        <th>Duration: <%= movie.duration %></th>
+      </tr>
+    	<tr>
+    			 <th>
+               Movie PG Program: <%= movie.rating %> 
+            </th>
+
+    	</tr>
+<th>Released: <%= movie.released_on %></th>
+<h3>Cast :<%= movie.cast %></h3>
+      	   
+  </li>
+      </table>
+      <h3>Price :<%= format_total_gross(movie.total_gross) %></h3>
+    <% end %>
+            <%= link_to("All Movies", movies_path) %>
+</ul>
